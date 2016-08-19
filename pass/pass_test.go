@@ -7,7 +7,7 @@ import (
 
 func BenchmarkPass(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		pass(16)
+		NewPass(16)
 	}
 }
 
@@ -21,7 +21,7 @@ func TestCreateRuneSet(t *testing.T) {
 func TestPass(t *testing.T) {
 	counter := make(map[string]int64)
 	for i := 0; i < 1000000; i++ {
-		s := pass(1)
+		s := NewPass(1)
 		counter[s]++
 	}
 	var max, min int64
