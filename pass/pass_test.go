@@ -12,7 +12,7 @@ func BenchmarkPass(b *testing.B) {
 }
 
 func TestCreateRuneSet(t *testing.T) {
-	set := createRuneSet()
+	set := []rune(passcharset)
 	if len(set) != 76 {
 		t.Error("runeset is not the right length")
 	}
@@ -39,7 +39,7 @@ func TestPass(t *testing.T) {
 
 	ratio := float64(min) / float64(max)
 	if ratio < .9 {
-		for i, c := range runeset {
+		for i, c := range []rune(passcharset) {
 			fmt.Printf("%d %s %d\n", i, string(c), counter[string(c)])
 		}
 		fmt.Printf("Max: %s %d, Min: %s %d\n", maxKey, max, minKey, min)

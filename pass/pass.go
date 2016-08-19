@@ -3,29 +3,14 @@ package pass
 import (
 	"crypto/rand"
 	"math/big"
-	"unicode/utf8"
 )
 
-const passcharset = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,?!#'-;:@$€%"`
+// const passcharset = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,?!#'-;:@$€%"`
+const passcharset = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,?!#`
 
-var runeset []rune
-
-func createRuneSet() []rune {
-	var set []rune
-	b := []byte(passcharset)
-
-	for len(b) > 0 {
-		r, size := utf8.DecodeRune(b)
-		set = append(set, r)
-		b = b[size:]
-	}
-	return set
-}
-
+//NewPass generates a password from passcharset with the given length
 func NewPass(length int) string {
-	if len(runeset) == 0 {
-		runeset = createRuneSet()
-	}
+	runeset := []rune(passcharset)
 	var pass string
 	for i := 0; i < length; i++ {
 		index, err := randomInt(len(runeset))
